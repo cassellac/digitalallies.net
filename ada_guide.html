@@ -852,10 +852,20 @@
 
         // Enhanced language toggle functionality
         function toggleLanguage() {
+            const button = document.querySelector('.language-toggle');
+            
+            // Visual feedback
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+            
             currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
             
-            // Update button text
-            const button = document.querySelector('.language-toggle');
+            // Update toggle button text
+            button.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
+            
+            // Update button appearance
             button.style.background = currentLanguage === 'es' ? 'var(--primary-blue)' : 'var(--white)';
             button.style.color = currentLanguage === 'es' ? 'var(--white)' : 'var(--primary-blue)';
             
