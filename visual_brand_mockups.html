@@ -99,9 +99,9 @@
         }
 
         .brand-dot {
-            width: 12px;
-            height: 12px;
-            background: var(--color-primary);
+            width: 10px;
+            height: 10px;
+            background: linear-gradient(135deg, #10b981, #059669);
             border-radius: 50%;
             animation: pulse 2s infinite;
         }
@@ -443,9 +443,35 @@
             color: var(--color-secondary);
             font-weight: 600;
         }
+
+        /* Language Toggle */
+        .language-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: var(--color-white);
+            border: 2px solid var(--color-primary);
+            border-radius: 25px;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: 500;
+            color: var(--color-primary);
+            transition: all 0.3s ease;
+            z-index: 1000;
+        }
+
+        .language-toggle:hover {
+            background: var(--color-primary);
+            color: var(--color-white);
+        }
     </style>
 </head>
 <body>
+    <!-- Global Language Toggle -->
+    <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle between English and Spanish">
+        EN / ES
+    </button>
+
     <div class="container">
         <header style="text-align: center; margin-bottom: 3rem;">
             <h1 style="font-family: var(--font-display); font-size: 3rem; margin-bottom: 1rem; display: flex; align-items: center; justify-content: center; gap: 0.8rem;"><span class="brand-dot"></span>Digital Allies</h1>
@@ -761,5 +787,26 @@
             <p>&copy; 2024 Digital Allies Brand System. For internal use and authorized partners only.</p>
         </footer>
     </div>
+
+    <script>
+        let currentLanguage = 'en';
+
+        // Language toggle functionality
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            
+            const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
+            elementsWithTranslation.forEach(element => {
+                const translation = element.getAttribute(`data-${currentLanguage}`);
+                if (translation) {
+                    if (element.placeholder !== undefined) {
+                        element.placeholder = translation;
+                    } else {
+                        element.textContent = translation;
+                    }
+                }
+            });
+        }
+    </script>
 </body>
 </html>

@@ -294,7 +294,7 @@
 
     .brand {
       font-family: var(--font-display);
-      font-size: var(--text-xl);
+      font-size: var(--text-2xl);
       font-weight: 900;
       text-decoration: none;
       color: var(--color-text);
@@ -304,9 +304,9 @@
     }
 
     .brand-dot {
-      width: 12px;
-      height: 12px;
-      background: var(--color-primary);
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(135deg, #10b981, #059669);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -348,6 +348,27 @@
     .language-toggle:hover {
       border-color: var(--color-primary);
       color: var(--color-primary);
+    }
+
+    /* Language Toggle (Global) */
+    .language-toggle-global {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--color-white);
+      border: 2px solid var(--color-primary);
+      border-radius: 25px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: 500;
+      color: var(--color-primary);
+      transition: all var(--duration-normal);
+      z-index: 1000;
+    }
+
+    .language-toggle-global:hover {
+      background: var(--color-primary);
+      color: var(--color-white);
     }
 
     /* ===== BUTTONS ===== */
@@ -636,6 +657,11 @@
 <body>
   <!-- Skip link for accessibility -->
   <a href="#main" class="skip-link">Skip to main content</a>
+  
+  <!-- Global Language Toggle -->
+  <button class="language-toggle-global" onclick="toggleLanguageGlobal()" aria-label="Toggle between English and Spanish">
+    EN / ES
+  </button>
   
   <!-- Animated background layers -->
   <div id="animated-background" aria-hidden="true"></div>
@@ -978,6 +1004,25 @@
   </footer>
 
   <script>
+    let currentLanguage = 'en';
+
+    // Global language toggle functionality
+    function toggleLanguageGlobal() {
+      currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+      
+      const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
+      elementsWithTranslation.forEach(element => {
+        const translation = element.getAttribute(`data-${currentLanguage}`);
+        if (translation) {
+          if (element.placeholder !== undefined) {
+            element.placeholder = translation;
+          } else {
+            element.textContent = translation;
+          }
+        }
+      });
+    }
+
     // Basic JavaScript for enhanced functionality
     document.addEventListener('DOMContentLoaded', function() {
       // Smooth scrolling for anchor links

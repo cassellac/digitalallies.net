@@ -32,9 +32,9 @@
       gap: 0.8rem;
     }
     .brand-dot {
-      width: 12px;
-      height: 12px;
-      background: #2563eb;
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(135deg, #10b981, #059669);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -65,9 +65,35 @@
       color: #6b7280;
       padding-top: 1rem;
     }
+    
+    /* Language Toggle */
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #2563eb;
+      border-radius: 25px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #2563eb;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+
+    .language-toggle:hover {
+      background: #2563eb;
+      color: #ffffff;
+    }
   </style>
 </head>
 <body>
+  <!-- Global Language Toggle -->
+  <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle between English and Spanish">
+    EN / ES
+  </button>
+
   <header>
     <h1><span class="brand-dot"></span>Digital Allies</h1>
     <nav>
@@ -95,5 +121,26 @@
     &copy; 2025 Digital Allies. All rights reserved.<br />
     <small>Version 1.6 — 2025-08-30</small>
   </footer>
+
+  <script>
+    let currentLanguage = 'en';
+
+    // Language toggle functionality
+    function toggleLanguage() {
+      currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+      
+      const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
+      elementsWithTranslation.forEach(element => {
+        const translation = element.getAttribute(`data-${currentLanguage}`);
+        if (translation) {
+          if (element.placeholder !== undefined) {
+            element.placeholder = translation;
+          } else {
+            element.textContent = translation;
+          }
+        }
+      });
+    }
+  </script>
 </body>
 </html>
