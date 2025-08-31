@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+<script>
+    Weglot.initialize({
+        api_key: 'wg_df6cbad23ced670d644376d9599dd7735'
+    });
+</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Digital Allies — Brand Assets, Resources and Website</title>
@@ -65,7 +71,6 @@
       color: #6b7280;
       padding-top: 1rem;
     }
-    
     /* Language Toggle */
     .language-toggle {
       position: fixed;
@@ -81,12 +86,10 @@
       transition: all 0.3s ease;
       z-index: 1000;
     }
-
     .language-toggle:hover {
       background: #2563eb;
       color: #ffffff;
     }
-
     .language-toggle:active {
       background: #1e40af;
       transform: scale(0.95);
@@ -98,7 +101,6 @@
   <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle between English and Spanish">
     EN / ES
   </button>
-
   <header>
     <h1><span class="brand-dot"></span><span data-translate="site-title">Digital Allies</span></h1>
     <nav>
@@ -108,7 +110,6 @@
       <a href="assets/logo_horizontal_primary.png" download style="text-decoration:none;">Download Logo</a>
     </nav>
   </header>
-
   <main>
     <p data-translate="welcome-description">Welcome! This is the entrypoint for Digital Allies brand assets and Website.</p>
     <ul>
@@ -121,12 +122,10 @@
       <li><a href="assets/favicon_32x32.png" download style="text-decoration:none;">Download favicon (PNG)</a></li>
     </ul>
   </main>
-
   <footer>
     <span data-translate="footer-text">&copy; 2025 Digital Allies. All rights reserved.</span><br />
     <small>Version 1.6 — 2025-08-30</small>
   </footer>
-
   <script>
     const translations = {
       'en': {
@@ -146,23 +145,17 @@
         'footer-text': '© 2025 Aliados Digitales. Todos los derechos reservados.'
       }
     };
-
     let currentLanguage = 'en';
-
     function toggleLanguage() {
       const button = document.querySelector('.language-toggle');
-      
       // Visual feedback
       button.style.transform = 'scale(0.95)';
       setTimeout(() => {
         button.style.transform = 'scale(1)';
       }, 150);
-      
       currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
-      
       // Update toggle button text
       button.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
-      
       // Update all translated content
       Object.keys(translations[currentLanguage]).forEach(key => {
         const element = document.querySelector(`[data-translate="${key}"]`);
@@ -170,7 +163,6 @@
           element.textContent = translations[currentLanguage][key];
         }
       });
-      
       // Fallback for existing data-en/data-es system
       const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
       elementsWithTranslation.forEach(element => {
