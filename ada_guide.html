@@ -415,6 +415,11 @@
             color: var(--white);
         }
 
+        .language-toggle:active {
+            background: var(--primary-dark);
+            transform: scale(0.95);
+        }
+
         /* Footer */
         footer {
             background: var(--text-dark);
@@ -778,6 +783,50 @@
     <script>
         let currentLanguage = 'en';
 
+        // Translation content
+        const translations = {
+            en: {
+                title: "Interactive ADA Accessibility Guide",
+                subtitle: "Comprehensive tools and resources for building inclusive digital experiences",
+                overview: "Overview",
+                guidelines: "Guidelines", 
+                testing: "Testing Tools",
+                examples: "Examples",
+                resources: "Resources",
+                understanding: "Understanding ADA Compliance",
+                understandingDesc: "The Americans with Disabilities Act (ADA) ensures equal access to digital content. Learn the fundamentals and why it matters for your business.",
+                wcagTitle: "WCAG 2.1 Guidelines",
+                wcagDesc: "The Web Content Accessibility Guidelines provide the framework for accessible web design. Follow these principles to ensure compliance.",
+                testingTitle: "Accessibility Testing Tools",
+                testingDesc: "Use these interactive tools to test and validate the accessibility of your web content.",
+                examplesTitle: "Interactive Examples",
+                examplesDesc: "See accessibility principles in action with these interactive demonstrations.",
+                resourcesTitle: "Additional Resources",
+                resourcesDesc: "Expand your accessibility knowledge with these curated resources and tools.",
+                footerText: "© 2025 Digital Allies. Building accessible web experiences for everyone."
+            },
+            es: {
+                title: "Guía Interactiva de Accesibilidad ADA",
+                subtitle: "Herramientas y recursos integrales para crear experiencias digitales inclusivas",
+                overview: "Resumen",
+                guidelines: "Pautas",
+                testing: "Herramientas de Prueba", 
+                examples: "Ejemplos",
+                resources: "Recursos",
+                understanding: "Entendiendo el Cumplimiento ADA",
+                understandingDesc: "La Ley de Estadounidenses con Discapacidades (ADA) garantiza el acceso igualitario al contenido digital. Aprende los fundamentos y por qué es importante para tu negocio.",
+                wcagTitle: "Pautas WCAG 2.1",
+                wcagDesc: "Las Pautas de Accesibilidad del Contenido Web proporcionan el marco para el diseño web accesible. Sigue estos principios para asegurar el cumplimiento.",
+                testingTitle: "Herramientas de Prueba de Accesibilidad",
+                testingDesc: "Usa estas herramientas interactivas para probar y validar la accesibilidad de tu contenido web.",
+                examplesTitle: "Ejemplos Interactivos", 
+                examplesDesc: "Ve los principios de accesibilidad en acción con estas demostraciones interactivas.",
+                resourcesTitle: "Recursos Adicionales",
+                resourcesDesc: "Expande tu conocimiento de accesibilidad con estos recursos y herramientas seleccionados.",
+                footerText: "© 2025 Digital Allies. Construyendo experiencias web accesibles para todos."
+            }
+        };
+
         // Tab functionality
         function showTab(tabName) {
             // Hide all tab contents
@@ -801,10 +850,24 @@
             event.target.setAttribute('aria-selected', 'true');
         }
 
-        // Language toggle functionality
+        // Enhanced language toggle functionality
         function toggleLanguage() {
             currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
             
+            // Update button text
+            const button = document.querySelector('.language-toggle');
+            button.style.background = currentLanguage === 'es' ? 'var(--primary-blue)' : 'var(--white)';
+            button.style.color = currentLanguage === 'es' ? 'var(--white)' : 'var(--primary-blue)';
+            
+            // Update all elements with translation keys
+            document.querySelectorAll('[data-translate]').forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // Legacy support for data-en/data-es attributes
             const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
             elementsWithTranslation.forEach(element => {
                 const translation = element.getAttribute(`data-${currentLanguage}`);

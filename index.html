@@ -34,7 +34,7 @@
     .brand-dot {
       width: 10px;
       height: 10px;
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: #2563eb;
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -86,6 +86,11 @@
       background: #2563eb;
       color: #ffffff;
     }
+
+    .language-toggle:active {
+      background: #1e40af;
+      transform: scale(0.95);
+    }
   </style>
 </head>
 <body>
@@ -123,12 +128,60 @@
   </footer>
 
   <script>
+    const translations = {
+      'en': {
+        'site-title': 'Digital Allies',
+        'nav-website': 'Full Website',
+        'nav-ada': 'ADA Guide',
+        'nav-brand': 'Brand Mockups',
+        'welcome-title': 'Welcome to Digital Allies',
+        'welcome-description': 'Comprehensive digital accessibility consulting and web development services.',
+        'explore-title': 'Explore Our Services',
+        'service-consulting': 'Accessibility Consulting',
+        'service-development': 'Web Development',
+        'service-training': 'Training & Education',
+        'footer-text': '© 2024 Digital Allies. All rights reserved.'
+      },
+      'es': {
+        'site-title': 'Aliados Digitales',
+        'nav-website': 'Sitio Web Completo',
+        'nav-ada': 'Guía ADA',
+        'nav-brand': 'Maquetas de Marca',
+        'welcome-title': 'Bienvenidos a Aliados Digitales',
+        'welcome-description': 'Servicios integrales de consultoría en accesibilidad digital y desarrollo web.',
+        'explore-title': 'Explora Nuestros Servicios',
+        'service-consulting': 'Consultoría en Accesibilidad',
+        'service-development': 'Desarrollo Web',
+        'service-training': 'Entrenamiento y Educación',
+        'footer-text': '© 2024 Aliados Digitales. Todos los derechos reservados.'
+      }
+    };
+
     let currentLanguage = 'en';
 
-    // Language toggle functionality
     function toggleLanguage() {
+      const button = document.querySelector('.language-toggle');
+      
+      // Visual feedback
+      button.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        button.style.transform = 'scale(1)';
+      }, 150);
+      
       currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
       
+      // Update toggle button text
+      button.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
+      
+      // Update all translated content
+      Object.keys(translations[currentLanguage]).forEach(key => {
+        const element = document.querySelector(`[data-translate="${key}"]`);
+        if (element) {
+          element.textContent = translations[currentLanguage][key];
+        }
+      });
+      
+      // Fallback for existing data-en/data-es system
       const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
       elementsWithTranslation.forEach(element => {
         const translation = element.getAttribute(`data-${currentLanguage}`);

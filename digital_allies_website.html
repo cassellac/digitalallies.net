@@ -306,7 +306,7 @@
     .brand-dot {
       width: 10px;
       height: 10px;
-      background: linear-gradient(135deg, #10b981, #059669);
+      background: var(--color-primary);
       border-radius: 50%;
       animation: pulse 2s infinite;
     }
@@ -371,6 +371,11 @@
       color: var(--color-white);
     }
 
+    .language-toggle-global:active {
+      background: #1d4ed8;
+      transform: scale(0.95);
+    }
+
     /* ===== BUTTONS ===== */
     .button {
       display: inline-flex;
@@ -378,7 +383,7 @@
       justify-content: center;
       padding: var(--space-3) var(--space-6);
       border: none;
-      border-radius: var(--radius-xl);
+      border-radius: 8px;
       font-family: var(--font-body);
       font-weight: 600;
       text-decoration: none;
@@ -420,7 +425,6 @@
 
     .button--ghost:hover,
     .button--ghost:focus {
-      border-color: var(--color-primary);
       color: var(--color-primary);
     }
 
@@ -1006,10 +1010,74 @@
   <script>
     let currentLanguage = 'en';
 
+    // Translation content
+    const translations = {
+      en: {
+        heroTitle: "Get Online, Stay Online, With Ease",
+        heroLead: "Bilingual web development and tech consulting for small businesses, schools, and individuals. We help you thrive online with ADA-compliant websites that actually work for your community.",
+        startProject: "Start Your Project",
+        ourServices: "Our Services", 
+        servicesTitle: "How We Help You Succeed",
+        websiteDev: "Website Development",
+        websiteDevDesc: "Custom, responsive websites built with accessibility in mind. Perfect for small businesses ready to establish their online presence.",
+        adaCompliance: "ADA Compliance",
+        adaComplianceDesc: "Ensure your website meets accessibility standards. We build inclusion from the ground up, not as an afterthought.",
+        bilingualSupport: "Bilingual Support",
+        bilingualSupportDesc: "True bilingual service in English and Spanish. Cultural understanding that goes beyond translation.",
+        training: "Training & Support",
+        trainingDesc: "Learn to manage your own website. We believe in empowering you with knowledge, not creating dependency.",
+        digitalMarketing: "Digital Marketing",
+        digitalMarketingDesc: "SEO, social media, and online advertising that connects with your local community and drives real results.",
+        maintenance: "Ongoing Maintenance",
+        maintenanceDesc: "Keep your website secure, updated, and performing well. Because getting online is just the beginning.",
+        pricingTitle: "Transparent Pricing",
+        testimonialTitle: "What Our Clients Say",
+        aboutTitle: "Our Story",
+        contactTitle: "Let's Build Something Together"
+      },
+      es: {
+        heroTitle: "Conéctate, Mantente Conectado, Con Facilidad",
+        heroLead: "Desarrollo web bilingüe y consultoría tecnológica para pequeñas empresas, escuelas e individuos. Te ayudamos a prosperar en línea con sitios web que cumplen con ADA y realmente funcionan para tu comunidad.",
+        startProject: "Inicia Tu Proyecto",
+        ourServices: "Nuestros Servicios",
+        servicesTitle: "Cómo Te Ayudamos a Tener Éxito",
+        websiteDev: "Desarrollo de Sitios Web",
+        websiteDevDesc: "Sitios web personalizados y responsivos construidos con accesibilidad en mente. Perfectos para pequeñas empresas listas para establecer su presencia en línea.",
+        adaCompliance: "Cumplimiento ADA",
+        adaComplianceDesc: "Asegura que tu sitio web cumpla con los estándares de accesibilidad. Construimos inclusión desde el principio, no como una idea tardía.",
+        bilingualSupport: "Soporte Bilingüe",
+        bilingualSupportDesc: "Verdadero servicio bilingüe en inglés y español. Comprensión cultural que va más allá de la traducción.",
+        training: "Entrenamiento y Soporte",
+        trainingDesc: "Aprende a administrar tu propio sitio web. Creemos en empoderarte con conocimiento, no en crear dependencia.",
+        digitalMarketing: "Marketing Digital",
+        digitalMarketingDesc: "SEO, redes sociales y publicidad en línea que conecta con tu comunidad local y genera resultados reales.",
+        maintenance: "Mantenimiento Continuo",
+        maintenanceDesc: "Mantén tu sitio web seguro, actualizado y funcionando bien. Porque conectarse en línea es solo el comienzo.",
+        pricingTitle: "Precios Transparentes",
+        testimonialTitle: "Lo Que Dicen Nuestros Clientes",
+        aboutTitle: "Nuestra Historia",
+        contactTitle: "Construyamos Algo Juntos"
+      }
+    };
+
     // Global language toggle functionality
     function toggleLanguageGlobal() {
       currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
       
+      // Update button appearance
+      const button = document.querySelector('.language-toggle-global');
+      button.style.background = currentLanguage === 'es' ? 'var(--color-primary)' : 'var(--color-white)';
+      button.style.color = currentLanguage === 'es' ? 'var(--color-white)' : 'var(--color-primary)';
+      
+      // Update all elements with translation keys
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[currentLanguage][key]) {
+          element.textContent = translations[currentLanguage][key];
+        }
+      });
+      
+      // Legacy support for data-en/data-es attributes
       const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
       elementsWithTranslation.forEach(element => {
         const translation = element.getAttribute(`data-${currentLanguage}`);
