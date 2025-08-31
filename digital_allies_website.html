@@ -108,6 +108,27 @@
     }
 
     /* ===== ANIMATED BACKGROUND ===== */
+    /* animation controls (adjustable globally via body or utility classes) */
+    :root {
+      --anim-gradient-duration: 12s;
+      --anim-waves-duration: 10s;
+      --anim-ease: ease-in-out;
+    }
+
+    /* utility classes to control animation speed site-wide */
+    .anim--fast {
+      --anim-gradient-duration: 8s;
+      --anim-waves-duration: 6s;
+    }
+    .anim--normal {
+      --anim-gradient-duration: 12s;
+      --anim-waves-duration: 10s;
+    }
+    .anim--slow {
+      --anim-gradient-duration: 20s;
+      --anim-waves-duration: 15s;
+    }
+
     #animated-background,
     #animated-waves,
     #animated-overlay {
@@ -118,19 +139,21 @@
       height: 100%;
       z-index: -1;
       pointer-events: none;
+      will-change: transform, opacity;
+      transform-origin: center;
     }
 
     #animated-background {
       background: linear-gradient(135deg, var(--color-accent-1), var(--color-accent-2), var(--color-accent-3));
       opacity: 0.1;
-      animation: gradientShift 20s ease-in-out infinite;
+      animation: gradientShift var(--anim-gradient-duration) var(--anim-ease) infinite;
     }
 
     #animated-waves {
       background: radial-gradient(circle at 20% 50%, var(--color-primary-light) 0%, transparent 50%),
-                  radial-gradient(circle at 80% 20%, var(--color-secondary-light) 0%, transparent 50%);
+            radial-gradient(circle at 80% 20%, var(--color-secondary-light) 0%, transparent 50%);
       opacity: 0.3;
-      animation: waveFloat 15s ease-in-out infinite;
+      animation: waveFloat var(--anim-waves-duration) var(--anim-ease) infinite;
     }
 
     @keyframes gradientShift {
@@ -141,6 +164,24 @@
     @keyframes waveFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
+    }
+
+    /* Respect reduced motion by collapsing animation durations (overrides variables) */
+    @media (prefers-reduced-motion: reduce) {
+      :root {
+      --anim-gradient-duration: 0.001ms;
+      --anim-waves-duration: 0.001ms;
+      }
+
+      #animated-background,
+      #animated-waves,
+      #animated-overlay {
+      animation-iteration-count: 1 !important;
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+      transform: none !important;
+      opacity: 1 !important;
+      }
     }
 
     /* ===== TYPOGRAPHY ===== */
