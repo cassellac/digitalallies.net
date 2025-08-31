@@ -335,21 +335,6 @@
       color: var(--color-primary);
     }
 
-    .language-toggle {
-      background: none;
-      border: 1px solid var(--color-neutral);
-      padding: var(--space-2) var(--space-3);
-      border-radius: var(--radius-md);
-      font-size: var(--text-sm);
-      cursor: pointer;
-      transition: all var(--duration-normal);
-    }
-
-    .language-toggle:hover {
-      border-color: var(--color-primary);
-      color: var(--color-primary);
-    }
-
     /* Language Toggle (Global) */
     .language-toggle-global {
       position: fixed;
@@ -383,7 +368,7 @@
       justify-content: center;
       padding: var(--space-3) var(--space-6);
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       font-family: var(--font-body);
       font-weight: 600;
       text-decoration: none;
@@ -432,7 +417,7 @@
     .card {
       background: var(--color-white);
       padding: var(--space-8);
-      border-radius: var(--radius-lg);
+      border-radius: 20px;
       box-shadow: var(--shadow-sm);
       transition: transform var(--duration-normal), box-shadow var(--duration-normal);
     }
@@ -485,7 +470,7 @@
     input, textarea, select {
       padding: var(--space-3);
       border: 2px solid var(--color-neutral-light);
-      border-radius: var(--radius-md);
+      border-radius: 25px;
       font-family: var(--font-body);
       font-size: var(--text-base);
       transition: border-color var(--duration-normal);
@@ -520,7 +505,7 @@
       width: 60px;
       height: 60px;
       background: var(--color-primary-light);
-      border-radius: var(--radius-lg);
+      border-radius: 20px;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -610,7 +595,7 @@
       background: var(--color-primary);
       color: var(--color-white);
       padding: var(--space-2) var(--space-4);
-      border-radius: var(--radius-md);
+      border-radius: 25px;
       text-decoration: none;
       z-index: 1001;
       font-weight: 600;
@@ -682,11 +667,6 @@
         <li><a href="#services" style="text-decoration:none;">Services</a></li>
         <li><a href="#about" style="text-decoration:none;">About</a></li>
         <li><a href="#contact" style="text-decoration:none;">Contact</a></li>
-        <li>
-          <button class="language-toggle" aria-label="Switch to Spanish">
-            ES
-          </button>
-        </li>
       </ul>
     </div>
   </nav>
@@ -710,7 +690,7 @@
     <!-- SERVICES SECTION -->
     <section id="services" class="section">
       <div class="container">
-        <h2 class="text-center mb-8">How We Help You Succeed</h2>
+        <h2 class="text-center mb-8" data-translate="services-title">How We Help You Succeed</h2>
         <div class="grid grid--3">
           <div class="card card--feature">
             <div class="service-icon">🌐</div>
@@ -749,7 +729,7 @@
     <!-- PRICING SECTION -->
     <section class="section" style="background: var(--color-neutral-light);">
       <div class="container">
-        <h2 class="text-center mb-8">Transparent Pricing</h2>
+        <h2 class="text-center mb-8" data-translate="pricing-title">Transparent Pricing</h2>
         <div class="grid grid--3">
           <div class="card card--pricing">
             <h3>Starter Website</h3>
@@ -807,7 +787,7 @@
     <!-- TESTIMONIALS SECTION -->
     <section class="section">
       <div class="container">
-        <h2 class="text-center mb-8">What Our Clients Say</h2>
+        <h2 class="text-center mb-8" data-translate="testimonials-title">What Our Clients Say</h2>
         <div class="grid grid--2">
           <div class="testimonial">
             <div class="testimonial-content">
@@ -884,7 +864,7 @@
     <!-- CONTACT SECTION -->
     <section id="contact" class="section">
       <div class="container">
-        <h2 class="text-center mb-8">Let's Build Something Together</h2>
+        <h2 class="text-center mb-8" data-translate="contact-title">Let's Build Something Together</h2>
         <div class="grid grid--2">
           <div class="card">
             <h3>Get In Touch</h3>
@@ -1013,10 +993,14 @@
     // Translation content
     const translations = {
       en: {
-        'hero-title': "Get Online, Stay Online, With Ease",
+        'hero-title': "Get Online, Stay Online, <em>With Ease</em>",
         'hero-description': "Bilingual web development and tech consulting for small businesses, schools, and individuals. We help you thrive online with ADA-compliant websites that actually work for your community.",
         'cta-start': "Start Your Project",
-        'cta-services': "Our Services", 
+        'cta-services': "Our Services",
+        'services-title': "How We Help You Succeed",
+        'pricing-title': "Transparent Pricing",
+        'testimonials-title': "What Our Clients Say",
+        'contact-title': "Let's Build Something Together",
         servicesTitle: "How We Help You Succeed",
         websiteDev: "Website Development",
         websiteDevDesc: "Custom, responsive websites built with accessibility in mind. Perfect for small businesses ready to establish their online presence.",
@@ -1036,10 +1020,14 @@
         contactTitle: "Let's Build Something Together"
       },
       es: {
-        'hero-title': "Conéctate, Mantente Conectado, Con Facilidad",
+        'hero-title': "Conéctate, Mantente Conectado, <em>Con Facilidad</em>",
         'hero-description': "Desarrollo web bilingüe y consultoría tecnológica para pequeñas empresas, escuelas e individuos. Te ayudamos a prosperar en línea con sitios web que cumplen con ADA y realmente funcionan para tu comunidad.",
         'cta-start': "Inicia Tu Proyecto",
         'cta-services': "Nuestros Servicios",
+        'services-title': "Cómo Te Ayudamos a Tener Éxito",
+        'pricing-title': "Precios Transparentes",
+        'testimonials-title': "Lo Que Dicen Nuestros Clientes",
+        'contact-title': "Construyamos Algo Juntos",
         servicesTitle: "Cómo Te Ayudamos a Tener Éxito",
         websiteDev: "Desarrollo de Sitios Web",
         websiteDevDesc: "Sitios web personalizados y responsivos construidos con accesibilidad en mente. Perfectos para pequeñas empresas listas para establecer su presencia en línea.",
@@ -1073,7 +1061,12 @@
       document.querySelectorAll('[data-translate]').forEach(element => {
         const key = element.getAttribute('data-translate');
         if (translations[currentLanguage][key]) {
-          element.textContent = translations[currentLanguage][key];
+          // Use innerHTML for elements that might contain HTML formatting
+          if (key === 'hero-title' || element.querySelector('em, strong, span')) {
+            element.innerHTML = translations[currentLanguage][key];
+          } else {
+            element.textContent = translations[currentLanguage][key];
+          }
         }
       });
       
@@ -1107,24 +1100,6 @@
           }
         });
       });
-
-      // Language toggle functionality (basic)
-      const languageToggle = document.querySelector('.language-toggle');
-      if (languageToggle) {
-        languageToggle.addEventListener('click', function() {
-          // This would integrate with your bilingual content system
-          const currentLang = this.textContent.trim();
-          if (currentLang === 'ES') {
-            this.textContent = 'EN';
-            this.setAttribute('aria-label', 'Switch to English');
-            // Load Spanish content here
-          } else {
-            this.textContent = 'ES';
-            this.setAttribute('aria-label', 'Switch to Spanish');
-            // Load English content here
-          }
-        });
-      }
 
       // Form submission handling
       const contactForm = document.querySelector('#contact form');

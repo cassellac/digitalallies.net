@@ -521,7 +521,7 @@
 
         <!-- Color System -->
         <section class="section">
-            <h2>Color Palette</h2>
+            <h2 data-translate="color-system">Color Palette</h2>
             <div class="color-grid">
                 <div class="color-swatch">
                     <div class="color-sample" style="background: #2563EB;">Primary</div>
@@ -592,7 +592,7 @@
 
         <!-- Typography System -->
         <section class="section">
-            <h2>Typography Scale</h2>
+            <h2 data-translate="typography-system">Typography Scale</h2>
             <div class="type-scale">
                 <div class="type-example">
                     <div class="type-label">H1 Display</div>
@@ -628,7 +628,7 @@
 
         <!-- Component System -->
         <section class="section">
-            <h2>UI Components</h2>
+            <h2 data-translate="ui-components">UI Components</h2>
             
             <div class="component-demo">
                 <h4>Buttons</h4>
@@ -795,6 +795,9 @@
                 'hero-title': 'Digital Allies',
                 'hero-subtitle': 'Visual Brand Guidelines & Style System',
                 'logo-system': 'Logo System',
+                'color-system': 'Color Palette',
+                'typography-system': 'Typography Scale',
+                'ui-components': 'UI Components',
                 'primary-logo': 'Primary Horizontal',
                 'primary-logo-desc': 'Main brand lockup',
                 'stacked-logo': 'Stacked Version',
@@ -820,6 +823,9 @@
                 'hero-title': 'Aliados Digitales',
                 'hero-subtitle': 'Guías Visuales de Marca y Sistema de Estilo',
                 'logo-system': 'Sistema de Logos',
+                'color-system': 'Paleta de Colores',
+                'typography-system': 'Escala Tipográfica',
+                'ui-components': 'Componentes de Interfaz',
                 'primary-logo': 'Principal Horizontal',
                 'primary-logo-desc': 'Composición principal de marca',
                 'stacked-logo': 'Versión Apilada',
@@ -863,7 +869,12 @@
             Object.keys(translations[currentLanguage]).forEach(key => {
                 const element = document.querySelector(`[data-translate="${key}"]`);
                 if (element) {
-                    element.textContent = translations[currentLanguage][key];
+                    // Use innerHTML for elements that might contain HTML formatting
+                    if (element.querySelector('em, strong, span') || key.includes('title')) {
+                        element.innerHTML = translations[currentLanguage][key];
+                    } else {
+                        element.textContent = translations[currentLanguage][key];
+                    }
                 }
             });
             
