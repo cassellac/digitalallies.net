@@ -2,174 +2,471 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Digital Allies — Brand Assets, Resources and Website</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Digital Allies — Get Online, Stay Online, With Ease</title>
   <link rel="icon" href="assets/favicon_32x32.png" type="image/png" />
-  <meta name="description" content="Digital Allies — Brand Assets, Resources and Website" />
-  <meta name="version" content="1.0 (2025-08-27)" />
+  <meta name="description" content="Bilingual web development and tech consulting for small businesses, schools, and individuals. ADA-compliant websites that drive results." />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://use.typekit.net/zzm6lbu.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  
   <style>
-    body {
-      font-family: "Segoe UI", Ubuntu, system-ui, -apple-system, Arial, sans-serif;
-      background: #f0ecf3;
-      color: #414243;
-      margin: 0;
-      padding: 2rem;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
+    /* ===== PAGE-SPECIFIC STYLES FOR HOMEPAGE ===== */
+    
+    /* Make the "With Ease" emphasized text italic */
+    .hero h1 em {
+      font-family: var(--font-primary);
+      font-weight: 400 !important;
+      font-style: italic;
+      color: var(--primary-blue);
     }
-    header {
-      margin-bottom: 2rem;
+
+    /* ===== ANIMATED BACKGROUND ===== */
+    #animated-background,
+    #animated-waves,
+    #animated-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      pointer-events: none;
     }
-    h1 {
-      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
-      font-size: 3rem;
-      font-weight: 900;
-      margin: 0 0 0.5rem;
+
+    #animated-background {
+      background: linear-gradient(
+        120deg,
+        var(--accent-1) 0%,
+        var(--accent-2) 25%,
+        var(--accent-3) 50%,
+        var(--accent-4) 75%,
+        var(--accent-1) 100%
+      );
+      background-size: 300% 300%;
+      animation: gradientShift var(--anim-gradient-duration) var(--anim-ease) infinite;
+    }
+
+    #animated-waves {
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      animation: waveShift var(--anim-waves-duration) var(--anim-ease) infinite;
+    }
+
+    #animated-overlay {
+      background: 
+        radial-gradient(circle at 60% 60%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+      animation: overlayFloat var(--anim-waves-duration) var(--anim-ease) infinite reverse;
+    }
+
+    @keyframes gradientShift {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+
+    @keyframes waveShift {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      33% { transform: translateX(-30px) translateY(-30px); }
+      66% { transform: translateX(30px) translateY(-20px); }
+    }
+
+    @keyframes overlayFloat {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    /* ===== HOMEPAGE NAVIGATION ===== */
+    .site-nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border-color);
+      z-index: 1000;
+      padding: var(--space-4) 0;
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 var(--space-6);
       display: flex;
       align-items: center;
-      gap: 0.8rem;
+      justify-content: space-between;
     }
-    .brand-dot {
-      width: 10px;
-      height: 10px;
-      background: #2563eb;
-      border-radius: 50%;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 0.7;
-        transform: scale(1);
-      }
-      50% {
-        opacity: 1;
-        transform: scale(1.1);
-      }
-    }
-    nav a {
-      margin-right: 1rem;
-      color: #2563eb;
+
+    .brand {
+      display: flex;
+      align-items: center;
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: var(--text-xl);
+      color: var(--text-dark);
       text-decoration: none;
     }
-    nav a:hover {
-      text-decoration: underline;
+
+    .brand:hover {
+      text-decoration: none;
     }
-    main {
-      flex: 1;
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: var(--space-6);
+      margin: 0;
+      padding: 0;
     }
-    footer {
-      text-align: center;
-      font-size: 0.8rem;
-      color: #6b7280;
-      padding-top: 1rem;
-    }
-    /* Language Toggle */
-    .language-toggle {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      background: #ffffff;
-      border: 2px solid #2563eb;
-      border-radius: 25px;
-      padding: 8px 16px;
-      cursor: pointer;
+
+    .nav-menu a {
       font-weight: 500;
-      color: #2563eb;
-      transition: all 0.3s ease;
-      z-index: 1000;
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      transition: all var(--duration-normal) ease;
     }
-    .language-toggle:hover {
-      background: #2563eb;
-      color: #ffffff;
+
+    .nav-menu a:hover {
+      background: var(--primary-light);
+      text-decoration: none;
     }
-    .language-toggle:active {
-      background: #1e40af;
-      transform: scale(0.95);
+
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      font-size: var(--text-xl);
+      cursor: pointer;
+      padding: var(--space-2);
+    }
+
+    /* ===== HERO SECTION ===== */
+    .hero {
+      padding: calc(var(--space-24) + 60px) 0 var(--space-24);
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: var(--space-6);
+    }
+
+    .hero .lead {
+      font-size: var(--text-xl);
+      margin-bottom: var(--space-8);
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-4);
+      justify-content: center;
+      margin-bottom: var(--space-12);
+    }
+
+    /* ===== RESPONSIVE DESIGN ===== */
+    @media (max-width: 768px) {
+      .nav-menu {
+        display: none;
+      }
+      
+      .nav-toggle {
+        display: block;
+      }
+      
+      .hero {
+        padding: calc(var(--space-16) + 60px) 0 var(--space-16);
+      }
+      
+      .hero-actions {
+        flex-direction: column;
+        align-items: center;
+      }
     }
   </style>
 </head>
 <body>
+  <!-- Skip link for accessibility -->
+  <a href="#main" class="skip-link">Skip to main content</a>
+  
   <!-- Global Language Toggle -->
-  <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle between English and Spanish">
+  <button class="language-toggle" onclick="toggleLanguageGlobal()" aria-label="Toggle between English and Spanish">
     EN / ES
   </button>
-  <header>
-    <h1><span class="brand-dot"></span><span data-translate="site-title">Digital Allies</span></h1>
-    <nav>
-      <a href="digital_allies_website.html" style="text-decoration:none;" data-translate="nav-website">Full Website</a>
-      <a href="ada_guide.html" style="text-decoration:none;" data-translate="nav-ada">ADA Guide</a>
-      <a href="visual_brand_mockups.html" style="text-decoration:none;" data-translate="nav-brand">Brand Mockups</a>
-      <a href="assets/logo_horizontal_primary.png" download style="text-decoration:none;">Download Logo</a>
-    </nav>
-  </header>
-  <main>
-    <p data-translate="welcome-description">Welcome! This is the entrypoint for Digital Allies brand assets and Website.</p>
-    <ul>
-      <li><a href="digital_allies_website.html" style="text-decoration:none;">Visit the full Digital Allies website</a></li>
-      <li><a href="visual_brand_mockups.html" style="text-decoration:none;">Preview brand mockups</a></li>
-      <li><a href="assets/logo_horizontal_primary.png" download style="text-decoration:none;">Download horizontal logo (PNG)</a></li>
-      <li><a href="assets/logo_stacked_square.png" download style="text-decoration:none;">Download stacked square logo (PNG)</a></li>
-      <li><a href="assets/logo_compact_horizontal.png" download style="text-decoration:none;">Download compact horizontal logo (PNG)</a></li>
-      <li><a href="assets/logo_reverse_white.png" download style="text-decoration:none;">Download reverse white logo (PNG)</a></li>
-      <li><a href="assets/favicon_32x32.png" download style="text-decoration:none;">Download favicon (PNG)</a></li>
-    </ul>
+  
+  <!-- Animated background layers -->
+  <div id="animated-background" aria-hidden="true"></div>
+  <div id="animated-waves" aria-hidden="true"></div>
+  <div id="animated-overlay" aria-hidden="true"></div>
+
+  <!-- Navigation -->
+  <nav class="site-nav" role="navigation" aria-label="Main navigation">
+    <div class="nav-container">
+      <a class="brand" href="#home" aria-label="Digital Allies Home">
+        <span class="brand-dot brand-dot--blue"></span>Digital Allies
+      </a>
+      <ul class="nav-menu">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="ada-guide.html">ADA Guide</a></li>
+      </ul>
+      <button class="nav-toggle" aria-label="Toggle mobile menu">☰</button>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!-- HERO SECTION -->
+    <section id="home" class="hero">
+      <div class="container">
+        <h1 data-translate="hero-title">Get Online, Stay Online, <em>With Ease</em></h1>
+        <p class="lead" data-translate="hero-description">
+          Bilingual web development and tech consulting for small businesses, schools, and individuals. 
+          We help you thrive online with ADA-compliant websites that actually work for your community.
+        </p>
+        <div class="hero-actions">
+          <a href="#contact" class="button button--primary" data-translate="cta-start">Start Your Project</a>
+          <a href="#services" class="button button--secondary" data-translate="cta-services">Our Services</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES SECTION -->
+    <section id="services" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" data-translate="services-title">How We Help You Succeed</h2>
+          <p class="section-description" data-translate="services-description">
+            We provide comprehensive digital solutions tailored to your community's needs.
+          </p>
+        </div>
+        <div class="grid grid--3">
+          <div class="card card--feature">
+            <div class="card-icon">🌐</div>
+            <h3 class="card-title" data-translate="service-web-title">Web Development</h3>
+            <p class="card-description" data-translate="service-web-description">
+              Custom websites that look great, load fast, and work perfectly on all devices. ADA-compliant from day one.
+            </p>
+          </div>
+          <div class="card card--feature">
+            <div class="card-icon">🛡️</div>
+            <h3 class="card-title" data-translate="service-accessibility-title">Accessibility</h3>
+            <p class="card-description" data-translate="service-accessibility-description">
+              Making your digital presence welcoming to everyone, including people with disabilities.
+            </p>
+          </div>
+          <div class="card card--feature">
+            <div class="card-icon">💬</div>
+            <h3 class="card-title" data-translate="service-bilingual-title">Bilingual Support</h3>
+            <p class="card-description" data-translate="service-bilingual-description">
+              Native Spanish and English support to reach your entire community effectively.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about" class="section" style="background: var(--neutral-light);">
+      <div class="container">
+        <div class="grid grid--2" style="align-items: center;">
+          <div>
+            <h2>Our Story</h2>
+            <p class="lead mb-4">
+              We started as CUUS, a small crew that believed in honest work, clear results, and fair access to digital tools. 
+              Digital Allies carries that forward in two languages, rooted in community and built on trust.
+            </p>
+            <p class="mb-8">
+              Every project is a partnership. We listen, map your goals, and ship clean solutions that last. 
+              From websites and hosting to training and support, we help you get online and stay online with ease.
+            </p>
+            <a href="#contact" class="button button--primary">Work With Us</a>
+          </div>
+          <div class="card">
+            <h3>Our Values</h3>
+            <div class="stack">
+              <div>
+                <strong>Inclusivity</strong> — Technology should be accessible to everyone
+              </div>
+              <div>
+                <strong>Partnership</strong> — We're allies, not just vendors
+              </div>
+              <div>
+                <strong>Transparency</strong> — Clear communication, honest pricing
+              </div>
+              <div>
+                <strong>Growth</strong> — Empowering sustainable success
+              </div>
+              <div>
+                <strong>Excellence</strong> — High-quality solutions that exceed expectations
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT SECTION -->
+    <section id="contact" class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2 class="section-title" data-translate="contact-title">Let's Build Something Together</h2>
+          <p class="section-description" data-translate="contact-description">
+            Ready to start your project? We're here to help.
+          </p>
+        </div>
+        <div class="grid grid--2">
+          <div class="card">
+            <h3>Get In Touch</h3>
+            <p class="mb-4">We'd love to hear about your project and discuss how we can help.</p>
+            <div class="stack">
+              <div>
+                <strong>Email:</strong> <a href="mailto:hello@digitalallies.net">hello@digitalallies.net</a>
+              </div>
+              <div>
+                <strong>Phone:</strong> <a href="tel:+1-555-0123">+1 (555) 012-3456</a>
+              </div>
+              <div>
+                <strong>Languages:</strong> English & Spanish
+              </div>
+            </div>
+          </div>
+          <div class="card">
+            <h3>Quick Start</h3>
+            <p class="mb-4">Not sure where to begin? Here's how we typically work together:</p>
+            <div class="stack">
+              <div>
+                <strong>1. Discovery Call</strong> — We listen to your needs and goals
+              </div>
+              <div>
+                <strong>2. Proposal</strong> — Clear timeline and transparent pricing
+              </div>
+              <div>
+                <strong>3. Build</strong> — Collaborative development with regular updates
+              </div>
+              <div>
+                <strong>4. Launch</strong> — Testing, training, and ongoing support
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   </main>
+
+  <!-- FOOTER -->
   <footer>
-    <span data-translate="footer-text">&copy; 2025 Digital Allies. All rights reserved.</span><br />
-    <small>Version 1.6 — 2025-08-30</small>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Resources</h3>
+          <ul>
+            <li><a href="ada-guide.html">ADA Guide</a></li>
+            <li><a href="#help">Help Center</a></li>
+            <li><a href="#blog">Blog</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Account Access</h3>
+          <ul>
+            <li><a href="#customer-portal">Customer Portal</a></li>
+            <li><a href="#staff-portal">Staff Portal</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Legal</h3>
+          <ul>
+            <li><a href="#privacy">Privacy Policy</a></li>
+            <li><a href="#terms">Terms of Service</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>Company</h3>
+          <ul>
+            <li><a href="#contact">Contact Us</a></li>
+            <li><a href="#about">About Digital Allies</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Digital Allies. All rights reserved.</p>
+      </div>
+    </div>
   </footer>
+
+  <!-- JavaScript -->
   <script>
+    // Language toggle functionality
     const translations = {
       'en': {
-        'site-title': 'Digital Allies',
-        'nav-website': 'Full Website',
-        'nav-ada': 'ADA Guide',
-        'nav-brand': 'Brand Mockups',
-        'welcome-description': 'Welcome! This is the entrypoint for Digital Allies brand assets and Website.',
-        'footer-text': '© 2025 Digital Allies. All rights reserved.'
+        'hero-title': 'Get Online, Stay Online, <em>With Ease</em>',
+        'hero-description': 'Bilingual web development and tech consulting for small businesses, schools, and individuals. We help you thrive online with ADA-compliant websites that actually work for your community.',
+        'cta-start': 'Start Your Project',
+        'cta-services': 'Our Services',
+        'services-title': 'How We Help You Succeed',
+        'services-description': 'We provide comprehensive digital solutions tailored to your community\'s needs.',
+        'service-web-title': 'Web Development',
+        'service-web-description': 'Custom websites that look great, load fast, and work perfectly on all devices. ADA-compliant from day one.',
+        'service-accessibility-title': 'Accessibility',
+        'service-accessibility-description': 'Making your digital presence welcoming to everyone, including people with disabilities.',
+        'service-bilingual-title': 'Bilingual Support',
+        'service-bilingual-description': 'Native Spanish and English support to reach your entire community effectively.',
+        'contact-title': 'Let\'s Build Something Together',
+        'contact-description': 'Ready to start your project? We\'re here to help.'
       },
       'es': {
-        'site-title': 'Aliados Digitales',
-        'nav-website': 'Sitio Web Completo',
-        'nav-ada': 'Guía ADA',
-        'nav-brand': 'Maquetas de Marca',
-        'welcome-description': '¡Bienvenidos! Este es el punto de entrada para los activos de marca y el sitio web de Aliados Digitales.',
-        'footer-text': '© 2025 Aliados Digitales. Todos los derechos reservados.'
+        'hero-title': 'Conéctate, Mantente Conectado, <em>Con Facilidad</em>',
+        'hero-description': 'Desarrollo web bilingüe y consultoría tecnológica para pequeñas empresas, escuelas e individuos. Te ayudamos a prosperar en línea con sitios web compatibles con ADA que realmente funcionan para tu comunidad.',
+        'cta-start': 'Iniciar Tu Proyecto',
+        'cta-services': 'Nuestros Servicios',
+        'services-title': 'Cómo Te Ayudamos a Tener Éxito',
+        'services-description': 'Proporcionamos soluciones digitales integrales adaptadas a las necesidades de tu comunidad.',
+        'service-web-title': 'Desarrollo Web',
+        'service-web-description': 'Sitios web personalizados que se ven geniales, cargan rápido y funcionan perfectamente en todos los dispositivos. Compatible con ADA desde el primer día.',
+        'service-accessibility-title': 'Accesibilidad',
+        'service-accessibility-description': 'Hacemos que tu presencia digital sea acogedora para todos, incluyendo personas con discapacidades.',
+        'service-bilingual-title': 'Soporte Bilingüe',
+        'service-bilingual-description': 'Soporte nativo en español e inglés para llegar a toda tu comunidad de manera efectiva.',
+        'contact-title': 'Construyamos Algo Juntos',
+        'contact-description': '¿Listo para comenzar tu proyecto? Estamos aquí para ayudar.'
       }
     };
+
     let currentLanguage = 'en';
-    function toggleLanguage() {
+
+    function toggleLanguageGlobal() {
       const button = document.querySelector('.language-toggle');
       // Visual feedback
       button.style.transform = 'scale(0.95)';
       setTimeout(() => {
         button.style.transform = 'scale(1)';
       }, 150);
+
+      // Toggle language
       currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
-      // Update toggle button text
-      button.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
-      // Update all translated content
-      Object.keys(translations[currentLanguage]).forEach(key => {
-        const element = document.querySelector(`[data-translate="${key}"]`);
-        if (element) {
-          element.textContent = translations[currentLanguage][key];
-        }
-      });
-      // Fallback for existing data-en/data-es system
-      const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
-      elementsWithTranslation.forEach(element => {
-        const translation = element.getAttribute(`data-${currentLanguage}`);
-        if (translation) {
-          if (element.placeholder !== undefined) {
-            element.placeholder = translation;
-          } else {
-            element.textContent = translation;
-          }
+      
+      // Update all translatable elements
+      document.querySelectorAll('[data-translate]').forEach(element => {
+        const key = element.getAttribute('data-translate');
+        if (translations[currentLanguage][key]) {
+          element.innerHTML = translations[currentLanguage][key];
         }
       });
     }
+
+    // Mobile navigation toggle
+    document.querySelector('.nav-toggle')?.addEventListener('click', function() {
+      const menu = document.querySelector('.nav-menu');
+      menu.classList.toggle('open');
+    });
   </script>
 </body>
 </html>
