@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <!-- Background circle for light themes (will be hidden on dark backgrounds) -->
+  <circle cx="16" cy="16" r="16" fill="#ffffff" class="light-bg"/>
+  <!-- Main brand dot -->
+  <circle cx="16" cy="16" r="8" fill="#2563EB"/>
+  
+  <!-- For dark themes, we'll use CSS to invert colors -->
+  <style>
+    @media (prefers-color-scheme: dark) {
+      .light-bg { fill: #1e293b; }
+      circle:nth-child(2) { fill: #ffffff; }
+    }
+  </style>
+</svg>

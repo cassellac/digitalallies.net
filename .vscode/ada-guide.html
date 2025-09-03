@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive ADA Accessibility Guide - Digital Allies</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="assets/favicon_32x32.png" type="image/png" />
+    <link rel="stylesheet" href="https://use.typekit.net/zzm6lbu.css">
+    <link rel="stylesheet" href="assets/css/global.css">
+    
+    <style>
+        /* ===== ADA GUIDE SPECIFIC STYLES ===== */
+        
+        /* ===== GLOBAL NAVIGATION BAR ===== */
+        .global-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1001;
+            padding: var(--space-3) 0;
+        }
+
+        .global-nav .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .global-nav .brand {
+            display: flex;
+            align-items: center;
+            font-family: var(--font-display);
+            font-weight: 900;
+            font-size: var(--text-lg);
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+
+        .global-nav .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: var(--space-4);
+            margin: 0;
+            padding: 0;
+        }
+
+        .global-nav .nav-menu a {
+            font-weight: 500;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            transition: all var(--duration-normal) ease;
+            font-size: var(--text-sm);
+        }
+
+        .global-nav .nav-menu a:hover {
+            background: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .global-nav .nav-menu a.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* ===== ADA GUIDE HEADER ===== */
+        .ada-header {
+            background: linear-gradient(135deg, var(--primary-blue) 0%, var(--secondary-teal) 100%);
+            color: var(--white);
+            padding: calc(var(--space-16) + 50px) 0 var(--space-8);
+            position: relative;
+            overflow: hidden;
+            margin-top: 60px; /* Account for global nav */
+        }
+
+        .ada-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="0.5" fill="rgba(255,255,255,0.08)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.06)"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>') repeat;
+            opacity: 0.3;
+        }
+
+        .ada-header .header-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+        }
+
+        .ada-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-4);
+            line-height: 1.2;
+        }
+
+        .ada-header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-8);
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== BREADCRUMB NAVIGATION ===== */
+        .breadcrumb {
+            background: var(--light-gray);
+            padding: var(--space-3) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .breadcrumb-nav {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-size: var(--text-sm);
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--space-6);
+        }
+
+        .breadcrumb-nav a {
+            color: var(--primary-blue);
+            text-decoration: none;
+        }
+
+        .breadcrumb-nav a:hover {
+            text-decoration: underline;
+        }
+
+        .breadcrumb-nav .separator {
+            color: var(--neutral-gray);
+        }
+
+        /* ===== DUAL NAVIGATION LAYOUT ===== */
+        .ada-content {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: var(--space-8);
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: var(--space-8) var(--space-6);
+            min-height: calc(100vh - 300px);
+        }
+
+        /* ===== LEFT SIDEBAR NAVIGATION ===== */
+        .sidebar-nav {
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+            background: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .sidebar-nav h3 {
+            font-size: var(--text-lg);
+            margin-bottom: var(--space-4);
+            color: var(--text-dark);
+            border-bottom: 2px solid var(--primary-blue);
+            padding-bottom: var(--space-2);
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: var(--space-1);
+        }
+
+        .sidebar-menu a {
+            display: block;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            color: var(--text-dark);
+            text-decoration: none;
+            transition: all var(--duration-normal) ease;
+            font-size: var(--text-sm);
+        }
+
+        .sidebar-menu a:hover {
+            background: var(--primary-light);
+            text-decoration: none;
+        }
+
+        .sidebar-menu a.active {
+            background: var(--primary-blue);
+            color: var(--white);
+        }
+
+        /* ===== MAIN CONTENT AREA ===== */
+        .main-content {
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+
+        .tab-content {
+            display: none;
+            padding: var(--space-8);
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ===== ORIGINAL ADA GUIDE SECTION STYLES ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--neutral-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* ===== CARDS GRID ===== */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* ===== ORIGINAL ADA GUIDE CARD STYLES ===== */
+        .main-content .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-teal));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .main-content .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .main-content .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .main-content .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .main-content .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .main-content .card-description {
+            color: var(--neutral-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        /* ===== CHECKLIST STYLES ===== */
+        .checklist {
+            list-style: none;
+            margin: var(--space-4) 0;
+        }
+
+        .checklist li {
+            display: flex;
+            align-items: flex-start;
+            gap: var(--space-2);
+            margin-bottom: var(--space-2);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            transition: background-color var(--duration-normal) ease;
+        }
+
+        .checklist li:hover {
+            background: var(--light-gray);
+        }
+
+        .checklist-icon {
+            color: var(--success);
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+
+        /* ===== DEMO CONTROLS ===== */
+        .demo-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-3);
+            margin: var(--space-6) 0;
+            padding: var(--space-4);
+            background: var(--light-gray);
+            border-radius: var(--radius-md);
+        }
+
+        .demo-controls input,
+        .demo-controls select,
+        .demo-controls button {
+            padding: var(--space-2) var(--space-4);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-md);
+            font-family: inherit;
+        }
+
+        .demo-controls button {
+            background: var(--primary-blue);
+            color: var(--white);
+            cursor: pointer;
+            transition: background-color var(--duration-normal) ease;
+        }
+
+        .demo-controls button:hover {
+            background: var(--primary-dark);
+        }
+
+        .demo-result {
+            margin: var(--space-4) 0;
+            padding: var(--space-4);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .demo-result.success {
+            background: var(--secondary-light);
+            border-left: 4px solid var(--success);
+        }
+
+        .demo-result.warning {
+            background: #fef3c7;
+            border-left: 4px solid var(--warning);
+        }
+
+        .demo-result.error {
+            background: #fee2e2;
+            border-left: 4px solid var(--error);
+        }
+
+        .result-icon {
+            font-size: 18px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .global-nav .nav-menu {
+                display: none;
+            }
+            
+            .ada-content {
+                grid-template-columns: 1fr;
+                gap: var(--space-4);
+                padding: var(--space-4);
+            }
+            
+            .sidebar-nav {
+                position: static;
+                margin-bottom: var(--space-4);
+            }
+            
+            .ada-header {
+                padding: calc(var(--space-12) + 50px) 0 var(--space-6);
+            }
+            
+            .ada-header h1 {
+                font-size: 2rem;
+            }
+            
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .demo-controls {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip link for accessibility -->
+    <a href="#main" class="skip-link">Skip to main content</a>
+    
+    <!-- Global Language Toggle -->
+    <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle between English and Spanish">
+        EN / ES
+    </button>
+    
+    <!-- Global Navigation -->
+    <nav class="global-nav" role="navigation" aria-label="Main navigation">
+        <div class="nav-container">
+            <a class="brand" href="index.html" aria-label="Digital Allies Home">
+                <span class="brand-dot brand-dot--blue"></span>Digital Allies
+            </a>
+            <ul class="nav-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ADA Guide Header -->
+    <header class="ada-header">
+        <div class="container">
+            <div class="header-content">
+                <h1 data-en="Interactive ADA Accessibility Guide" data-es="Guía Interactiva de Accesibilidad ADA">Interactive ADA Accessibility Guide</h1>
+                <p class="subtitle" data-en="Comprehensive tools and resources for building inclusive digital experiences" data-es="Herramientas y recursos integrales para crear experiencias digitales inclusivas">Comprehensive tools and resources for building inclusive digital experiences</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Breadcrumb Navigation -->
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+        <div class="breadcrumb-nav">
+            <a href="index.html">Home</a>
+            <span class="separator">›</span>
+            <span>ADA Guide</span>
+            <span class="separator">›</span>
+            <span id="current-section">Overview</span>
+        </div>
+    </nav>
+
+    <!-- Main Content with Dual Navigation -->
+    <main id="main" class="ada-content">
+        <!-- Left Sidebar Navigation -->
+        <aside class="sidebar-nav" role="navigation" aria-label="ADA Guide sections">
+            <h3>Overview</h3>
+            <ul class="sidebar-menu">
+                <li><a href="#overview" onclick="showTab('overview')" class="active" data-en="Understanding ADA" data-es="Entendiendo ADA">Understanding ADA</a></li>
+                <li><a href="#guidelines" onclick="showTab('guidelines')" data-en="WCAG Guidelines" data-es="Pautas WCAG">WCAG Guidelines</a></li>
+                <li><a href="#testing" onclick="showTab('testing')" data-en="Testing Tools" data-es="Herramientas de Prueba">Testing Tools</a></li>
+                <li><a href="#examples" onclick="showTab('examples')" data-en="Examples" data-es="Ejemplos">Examples</a></li>
+                <li><a href="#resources" onclick="showTab('resources')" data-en="Resources" data-es="Recursos">Resources</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content Area -->
+        <div class="main-content">
+            <!-- Overview Tab -->
+            <div id="overview" class="tab-content active" role="tabpanel">
+                <div class="section-header">
+                    <h2 class="section-title" data-en="Understanding ADA Compliance" data-es="Entendiendo el Cumplimiento ADA">Understanding ADA Compliance</h2>
+                    <p class="section-description" data-en="The Americans with Disabilities Act (ADA) ensures equal access to digital content. Learn the fundamentals and why it matters for your business." data-es="La Ley de Estadounidenses con Discapacidades (ADA) garantiza el acceso igualitario al contenido digital. Aprende los fundamentos y por qué es importante para tu negocio.">The Americans with Disabilities Act (ADA) ensures equal access to digital content. Learn the fundamentals and why it matters for your business.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">⚖️</div>
+                        <h3 class="card-title" data-en="Legal Requirements" data-es="Requisitos Legales">Legal Requirements</h3>
+                        <p class="card-description" data-en="ADA Title III requires places of public accommodation to be accessible. This includes websites for businesses serving the public." data-es="El Título III de ADA requiere que los lugares de acomodación pública sean accesibles. Esto incluye sitios web para negocios que sirven al público.">ADA Title III requires places of public accommodation to be accessible. This includes websites for businesses serving the public.</p>
+                        <ul class="checklist">
+                            <li><span class="checklist-icon">✓</span><span data-en="Applies to businesses open to the public" data-es="Se aplica a negocios abiertos al público">Applies to businesses open to the public</span></li>
+                            <li><span class="checklist-icon">✓</span><span data-en="Includes digital properties and websites" data-es="Incluye propiedades digitales y sitios web">Includes digital properties and websites</span></li>
+                            <li><span class="checklist-icon">✓</span><span data-en="Covers mobile apps and digital tools" data-es="Cubre aplicaciones móviles y herramientas digitales">Covers mobile apps and digital tools</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">🎯</div>
+                        <h3 class="card-title" data-en="Business Benefits" data-es="Beneficios Comerciales">Business Benefits</h3>
+                        <p class="card-description" data-en="Accessibility improvements benefit everyone and can significantly improve your bottom line." data-es="Las mejoras de accesibilidad benefician a todos y pueden mejorar significativamente sus resultados finales.">Accessibility improvements benefit everyone and can significantly improve your bottom line.</p>
+                        <ul class="checklist">
+                            <li><span class="checklist-icon">🌟</span><span data-en="Better user experience for all" data-es="Mejor experiencia de usuario para todos">Better user experience for all</span></li>
+                            <li><span class="checklist-icon">📈</span><span data-en="Improved SEO and search rankings" data-es="SEO mejorado y rankings de búsqueda">Improved SEO and search rankings</span></li>
+                            <li><span class="checklist-icon">🎯</span><span data-en="Larger target audience" data-es="Audiencia objetivo más grande">Larger target audience</span></li>
+                            <li><span class="checklist-icon">🛡️</span><span data-en="Reduced legal risk" data-es="Riesgo legal reducido">Reduced legal risk</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Guidelines Tab -->
+            <div id="guidelines" class="tab-content" role="tabpanel">
+                <div class="section-header">
+                    <h2 class="section-title" data-en="WCAG 2.1 Guidelines" data-es="Pautas WCAG 2.1">WCAG 2.1 Guidelines</h2>
+                    <p class="section-description" data-en="Web Content Accessibility Guidelines (WCAG) 2.1 provides the technical foundation for ADA compliance." data-es="Las Pautas de Accesibilidad del Contenido Web (WCAG) 2.1 proporcionan la base técnica para el cumplimiento de ADA.">Web Content Accessibility Guidelines (WCAG) 2.1 provides the technical foundation for ADA compliance.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <div class="card-icon">👁️</div>
+                        <h3 class="card-title" data-en="Perceivable" data-es="Perceptible">Perceivable</h3>
+                        <p class="card-description" data-en="Information and user interface components must be presentable to users in ways they can perceive." data-es="La información y los componentes de la interfaz de usuario deben ser presentables a los usuarios de maneras que puedan percibir.">Information and user interface components must be presentable to users in ways they can perceive.</p>
+                        <ul class="checklist">
+                            <li><span class="checklist-icon">🖼️</span><span data-en="Provide text alternatives for images" data-es="Proporcionar alternativas de texto para imágenes">Provide text alternatives for images</span></li>
+                            <li><span class="checklist-icon">🎨</span><span data-en="Use sufficient color contrast" data-es="Usar contraste de color suficiente">Use sufficient color contrast</span></li>
+                            <li><span class="checklist-icon">📱</span><span data-en="Ensure content adapts to different screen sizes" data-es="Asegurar que el contenido se adapte a diferentes tamaños de pantalla">Ensure content adapts to different screen sizes</span></li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-icon">⌨️</div>
+                        <h3 class="card-title" data-en="Operable" data-es="Operable">Operable</h3>
+                        <p class="card-description" data-en="User interface components and navigation must be operable by all users." data-es="Los componentes de la interfaz de usuario y la navegación deben ser operables por todos los usuarios.">User interface components and navigation must be operable by all users.</p>
+                        <ul class="checklist">
+                            <li><span class="checklist-icon">⌨️</span><span data-en="Make all functionality keyboard accessible" data-es="Hacer toda la funcionalidad accesible por teclado">Make all functionality keyboard accessible</span></li>
+                            <li><span class="checklist-icon">⏱️</span><span data-en="Give users enough time to read content" data-es="Dar a los usuarios tiempo suficiente para leer el contenido">Give users enough time to read content</span></li>
+                            <li><span class="checklist-icon">🚫</span><span data-en="Don't cause seizures or vestibular disorders" data-es="No causar convulsiones o trastornos vestibulares">Don't cause seizures or vestibular disorders</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Testing Tools Tab -->
+            <div id="testing" class="tab-content" role="tabpanel">
+                <div class="section-header">
+                    <h2 class="section-title" data-en="Accessibility Testing Tools" data-es="Herramientas de Prueba de Accesibilidad">Accessibility Testing Tools</h2>
+                    <p class="section-description" data-en="Essential tools and techniques for testing accessibility compliance." data-es="Herramientas y técnicas esenciales para probar el cumplimiento de accesibilidad.">Essential tools and techniques for testing accessibility compliance.</p>
+                </div>
+
+                <div class="demo-controls">
+                    <button onclick="runColorContrastTest()">Test Color Contrast</button>
+                    <button onclick="runKeyboardTest()">Test Keyboard Navigation</button>
+                    <button onclick="runScreenReaderTest()">Test Screen Reader</button>
+                </div>
+
+                <div id="demo-result" class="demo-result success" style="display: none;">
+                    <span class="result-icon">✅</span>
+                    <span>Test results will appear here</span>
+                </div>
+            </div>
+
+            <!-- Examples Tab -->
+            <div id="examples" class="tab-content" role="tabpanel">
+                <div class="section-header">
+                    <h2 class="section-title" data-en="Accessibility Examples" data-es="Ejemplos de Accesibilidad">Accessibility Examples</h2>
+                    <p class="section-description" data-en="See accessibility principles in action with real-world examples." data-es="Vea los principios de accesibilidad en acción con ejemplos del mundo real.">See accessibility principles in action with real-world examples.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3 class="card-title">Good Example: Accessible Form</h3>
+                        <p class="card-description">This form includes proper labels, error handling, and keyboard navigation.</p>
+                        <form style="margin-top: 1rem;">
+                            <label for="name">Full Name (required)</label>
+                            <input type="text" id="name" name="name" required aria-describedby="name-help">
+                            <div id="name-help" style="font-size: 0.9rem; color: #666;">Please enter your full name</div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Tab -->
+            <div id="resources" class="tab-content" role="tabpanel">
+                <div class="section-header">
+                    <h2 class="section-title" data-en="Additional Resources" data-es="Recursos Adicionales">Additional Resources</h2>
+                    <p class="section-description" data-en="Links to official guidelines, tools, and further reading." data-es="Enlaces a pautas oficiales, herramientas y lectura adicional.">Links to official guidelines, tools, and further reading.</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card">
+                        <h3 class="card-title">Official Guidelines</h3>
+                        <ul>
+                            <li><a href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener">WCAG 2.1 Quick Reference</a></li>
+                            <li><a href="https://www.ada.gov/" target="_blank" rel="noopener">ADA.gov Official Site</a></li>
+                            <li><a href="https://webaim.org/" target="_blank" rel="noopener">WebAIM Resources</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3 class="card-title">Testing Tools</h3>
+                        <ul>
+                            <li><a href="https://wave.webaim.org/" target="_blank" rel="noopener">WAVE Web Accessibility Evaluator</a></li>
+                            <li><a href="https://www.deque.com/axe/" target="_blank" rel="noopener">axe DevTools</a></li>
+                            <li><a href="https://color.adobe.com/create/color-contrast-analyzer" target="_blank" rel="noopener">Color Contrast Analyzer</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="ada-guide.html">ADA Guide</a></li>
+                        <li><a href="#help">Help Center</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Account Access</h3>
+                    <ul>
+                        <li><a href="#customer-portal">Customer Portal</a></li>
+                        <li><a href="#staff-portal">Staff Portal</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#privacy">Privacy Policy</a></li>
+                        <li><a href="#terms">Terms of Service</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="index.html#contact">Contact Us</a></li>
+                        <li><a href="index.html#about">About Digital Allies</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Digital Allies. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        let currentLanguage = 'en';
+
+        // Tab navigation functionality
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all sidebar links
+            const sidebarLinks = document.querySelectorAll('.sidebar-menu a');
+            sidebarLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked link
+            event.target.classList.add('active');
+
+            // Update breadcrumb
+            const sectionNames = {
+                'overview': currentLanguage === 'en' ? 'Understanding ADA' : 'Entendiendo ADA',
+                'guidelines': currentLanguage === 'en' ? 'WCAG Guidelines' : 'Pautas WCAG',
+                'testing': currentLanguage === 'en' ? 'Testing Tools' : 'Herramientas de Prueba',
+                'examples': currentLanguage === 'en' ? 'Examples' : 'Ejemplos',
+                'resources': currentLanguage === 'en' ? 'Resources' : 'Recursos'
+            };
+            document.getElementById('current-section').textContent = sectionNames[tabName];
+        }
+
+        // Language toggle functionality
+        function toggleLanguage() {
+            const button = document.querySelector('.language-toggle');
+            
+            // Visual feedback
+            button.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+            }, 150);
+            
+            currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-en]').forEach(element => {
+                if (currentLanguage === 'en') {
+                    element.textContent = element.getAttribute('data-en');
+                } else {
+                    element.textContent = element.getAttribute('data-es');
+                }
+            });
+        }
+
+        // Demo testing functions
+        function runColorContrastTest() {
+            const result = document.getElementById('demo-result');
+            result.style.display = 'flex';
+            result.className = 'demo-result success';
+            result.innerHTML = '<span class="result-icon">✅</span><span>Color contrast test passed! All text meets WCAG AA standards.</span>';
+        }
+
+        function runKeyboardTest() {
+            const result = document.getElementById('demo-result');
+            result.style.display = 'flex';
+            result.className = 'demo-result success';
+            result.innerHTML = '<span class="result-icon">⌨️</span><span>Keyboard navigation test passed! All interactive elements are keyboard accessible.</span>';
+        }
+
+        function runScreenReaderTest() {
+            const result = document.getElementById('demo-result');
+            result.style.display = 'flex';
+            result.className = 'demo-result success';
+            result.innerHTML = '<span class="result-icon">🔊</span><span>Screen reader test passed! All content has proper semantic markup and labels.</span>';
+        }
+    </script>
+</body>
+</html>

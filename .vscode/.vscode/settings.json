@@ -1,0 +1,9 @@
+{
+    "websearch.preferredEngine": "bing",
+    "websearch.useSearchResultsDirectly": true,
+    "azureMcp.readOnly": false,
+    "azureMcp.enabledServices": [
+        "storage",
+        "cosmos"
+    ]
+}
