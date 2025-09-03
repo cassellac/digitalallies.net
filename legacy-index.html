@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Digital Allies — Brand Assets, Resources and Website</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
+  <link rel="icon" href="assets/favicon_32x32.png" type="image/png" />
+  <meta name="description" content="Digital Allies — Brand Assets, Resources and Website" />
+  <meta name="version" content="1.0 (2025-08-27)" />
+  <link rel="stylesheet" href="https://use.typekit.net/zzm6lbu.css">
+  <link rel="stylesheet" href="assets/css/global.css">
+  <style>
+    body {
+      font-family: "Segoe UI", Ubuntu, system-ui, -apple-system, Arial, sans-serif;
+      background: #f0ecf3;
+      color: #414243;
+      margin: 0;
+      padding: 2rem;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+    header {
+      margin-bottom: 2rem;
+    }
+    h1 {
+      font-family: 'Segoe UI', system-ui, -apple-system, Arial, sans-serif;
+      font-size: 3rem;
+      font-weight: 900;
+      margin: 0 0 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .brand-dot {
+      width: 10px;
+      height: 10px;
+      background: #2563eb;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 0.7;
+        transform: scale(1);
+      }
+      50% {
+        opacity: 1;
+        transform: scale(1.1);
+      }
+    }
+    nav a {
+      margin-right: 1rem;
+      color: #2563eb;
+      text-decoration: none;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      flex: 1;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.8rem;
+      color: #6b7280;
+      padding-top: 1rem;
+    }
+    /* Language Toggle */
+    .language-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #ffffff;
+      border: 2px solid #2563eb;
+      border-radius: 25px;
+      padding: 8px 16px;
+      cursor: pointer;
+      font-weight: 500;
+      color: #2563eb;
+      transition: all 0.3s ease;
+      z-index: 1000;
+    }
+    .language-toggle:hover {
+      background: #2563eb;
+      color: #ffffff;
+    }
+    .language-toggle:active {
+      background: #1e40af;
+      transform: scale(0.95);
+    }
+  </style>
+</head>
+<body>
+  <!-- Global Language Toggle -->
+  <button class="language-toggle" onclick="toggleLanguage()" aria-label="Toggle between English and Spanish">
+    EN / ES
+  </button>
+  <header>
+    <h1><span class="brand-dot"></span><span data-translate="site-title">Digital Allies</span></h1>
+    <nav>
+      <a href="index.html" style="text-decoration:none;" data-translate="nav-website">Full Website</a>
+      <a href="ada-guide.html" style="text-decoration:none;" data-translate="nav-ada">ADA Guide</a>
+      <a href="visual_brand_mockups.html" style="text-decoration:none;" data-translate="nav-brand">Brand Mockups</a>
+      <a href="assets/logo_horizontal_primary.png" download style="text-decoration:none;">Download Logo</a>
+    </nav>
+  </header>
+  <main>
+    <p data-translate="welcome-description">Welcome! This is the entrypoint for Digital Allies brand assets and Website.</p>
+    <ul>
+      <li><a href="index.html" style="text-decoration:none;">Visit the full Digital Allies website</a></li>
+      <li><a href="visual_brand_mockups.html" style="text-decoration:none;">Preview brand mockups</a></li>
+      <li><a href="assets/logo_horizontal_primary.png" download style="text-decoration:none;">Download horizontal logo (PNG)</a></li>
+      <li><a href="assets/logo_stacked_square.png" download style="text-decoration:none;">Download stacked square logo (PNG)</a></li>
+      <li><a href="assets/logo_compact_horizontal.png" download style="text-decoration:none;">Download compact horizontal logo (PNG)</a></li>
+      <li><a href="assets/logo_reverse_white.png" download style="text-decoration:none;">Download reverse white logo (PNG)</a></li>
+      <li><a href="assets/favicon_32x32.png" download style="text-decoration:none;">Download favicon (PNG)</a></li>
+    </ul>
+  </main>
+  <footer>
+    <span data-translate="footer-text">&copy; 2025 Digital Allies. All rights reserved.</span><br />
+    <small>Version 1.6 — 2025-08-30</small>
+  </footer>
+  <script>
+    const translations = {
+      'en': {
+        'site-title': 'Digital Allies',
+        'nav-website': 'Full Website',
+        'nav-ada': 'ADA Guide',
+        'nav-brand': 'Brand Mockups',
+        'welcome-description': 'Welcome! This is the entrypoint for Digital Allies brand assets and Website.',
+        'footer-text': '© 2025 Digital Allies. All rights reserved.'
+      },
+      'es': {
+        'site-title': 'Aliados Digitales',
+        'nav-website': 'Sitio Web Completo',
+        'nav-ada': 'Guía ADA',
+        'nav-brand': 'Maquetas de Marca',
+        'welcome-description': '¡Bienvenidos! Este es el punto de entrada para los activos de marca y el sitio web de Aliados Digitales.',
+        'footer-text': '© 2025 Aliados Digitales. Todos los derechos reservados.'
+      }
+    };
+    let currentLanguage = 'en';
+    function toggleLanguage() {
+      const button = document.querySelector('.language-toggle');
+      // Visual feedback
+      button.style.transform = 'scale(0.95)';
+      setTimeout(() => {
+        button.style.transform = 'scale(1)';
+      }, 150);
+      currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+      // Update toggle button text
+      button.textContent = currentLanguage === 'en' ? 'ES' : 'EN';
+      // Update all translated content
+      Object.keys(translations[currentLanguage]).forEach(key => {
+        const element = document.querySelector(`[data-translate="${key}"]`);
+        if (element) {
+          element.textContent = translations[currentLanguage][key];
+        }
+      });
+      // Fallback for existing data-en/data-es system
+      const elementsWithTranslation = document.querySelectorAll('[data-en][data-es]');
+      elementsWithTranslation.forEach(element => {
+        const translation = element.getAttribute(`data-${currentLanguage}`);
+        if (translation) {
+          if (element.placeholder !== undefined) {
+            element.placeholder = translation;
+          } else {
+            element.textContent = translation;
+          }
+        }
+      });
+    }
+  </script>
+</body>
+</html>
