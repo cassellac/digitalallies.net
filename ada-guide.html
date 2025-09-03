@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive ADA Accessibility Guide - Digital Allies</title>
+    <link rel="icon" href="assets/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="assets/favicon_32x32.png" type="image/png" />
     <link rel="stylesheet" href="https://use.typekit.net/zzm6lbu.css">
     <link rel="stylesheet" href="assets/css/global.css">
@@ -223,12 +224,91 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        /* ===== ORIGINAL ADA GUIDE SECTION STYLES ===== */
+        .section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--neutral-gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
         /* ===== CARDS GRID ===== */
         .cards-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-6);
-            margin: var(--space-8) 0;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        /* ===== ORIGINAL ADA GUIDE CARD STYLES ===== */
+        .main-content .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 2px solid var(--border-color);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .main-content .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-blue), var(--secondary-teal));
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .main-content .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .main-content .card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.1);
+            border-color: var(--primary-blue);
+        }
+
+        .main-content .card-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--secondary-teal));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+
+        .main-content .card-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .main-content .card-description {
+            color: var(--neutral-gray);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
 
         /* ===== CHECKLIST STYLES ===== */
@@ -371,7 +451,6 @@
                 <li><a href="index.html#services">Services</a></li>
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
-                <li><a href="ada-guide.html" class="active">ADA Guide</a></li>
             </ul>
         </div>
     </nav>
