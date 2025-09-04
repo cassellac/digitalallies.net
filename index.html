@@ -136,28 +136,7 @@
       text-decoration: none;
     }
 
-    /* ===== ANIMATED BACKGROUND ===== */
-    /* animation controls (adjustable globally via body or utility classes) */
-    :root {
-      --anim-gradient-duration: 12s;
-      --anim-waves-duration: 10s;
-      --anim-ease: ease-in-out;
-    }
-
-    /* utility classes to control animation speed site-wide */
-    .anim--fast {
-      --anim-gradient-duration: 8s;
-      --anim-waves-duration: 6s;
-    }
-    .anim--normal {
-      --anim-gradient-duration: 12s;
-      --anim-waves-duration: 10s;
-    }
-    .anim--slow {
-      --anim-gradient-duration: 20s;
-      --anim-waves-duration: 15s;
-    }
-
+     /* ===== ANIMATED BACKGROUND ===== */
     #animated-background,
     #animated-waves,
     #animated-overlay {
@@ -168,49 +147,50 @@
       height: 100%;
       z-index: -1;
       pointer-events: none;
-      will-change: transform, opacity;
-      transform-origin: center;
     }
 
     #animated-background {
-      background: linear-gradient(135deg, var(--color-accent-1), var(--color-accent-2), var(--color-accent-3));
-      opacity: 0.1;
+      background: linear-gradient(
+        120deg,
+        var(--accent-1) 0%,
+        var(--accent-2) 25%,
+        var(--accent-3) 50%,
+        var(--accent-4) 75%,
+        var(--accent-1) 100%
+      );
+      background-size: 300% 300%;
       animation: gradientShift var(--anim-gradient-duration) var(--anim-ease) infinite;
     }
 
     #animated-waves {
-      background: radial-gradient(circle at 20% 50%, var(--color-primary-light) 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, var(--color-secondary-light) 0%, transparent 50%);
-      opacity: 0.3;
-      animation: waveFloat var(--anim-waves-duration) var(--anim-ease) infinite;
+      background: 
+        radial-gradient(circle at 20% 20%, rgba(37, 99, 235, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(5, 150, 105, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 40% 40%, rgba(139, 92, 246, 0.1) 0%, transparent 50%);
+      animation: waveShift var(--anim-waves-duration) var(--anim-ease) infinite;
+    }
+
+    #animated-overlay {
+      background: 
+        radial-gradient(circle at 60% 60%, rgba(249, 115, 22, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 90% 10%, rgba(236, 72, 153, 0.08) 0%, transparent 50%);
+      animation: overlayFloat var(--anim-waves-duration) var(--anim-ease) infinite reverse;
     }
 
     @keyframes gradientShift {
-      0%, 100% { transform: translateX(0) rotate(0deg); }
-      50% { transform: translateX(20px) rotate(1deg); }
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
     }
 
-    @keyframes waveFloat {
+    @keyframes waveShift {
+      0%, 100% { transform: translateX(0) translateY(0); }
+      33% { transform: translateX(-30px) translateY(-30px); }
+      66% { transform: translateX(30px) translateY(-20px); }
+    }
+
+    @keyframes overlayFloat {
       0%, 100% { transform: translateY(0); }
       50% { transform: translateY(-20px); }
-    }
-
-    /* Respect reduced motion by collapsing animation durations (overrides variables) */
-    @media (prefers-reduced-motion: reduce) {
-      :root {
-      --anim-gradient-duration: 0.001ms;
-      --anim-waves-duration: 0.001ms;
-      }
-
-      #animated-background,
-      #animated-waves,
-      #animated-overlay {
-      animation-iteration-count: 1 !important;
-      animation-duration: 0.001ms !important;
-      transition-duration: 0.001ms !important;
-      transform: none !important;
-      opacity: 1 !important;
-      }
     }
 
     /* ===== TYPOGRAPHY ===== */
